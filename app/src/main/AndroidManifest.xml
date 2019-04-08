@@ -20,6 +20,7 @@
         </activity>
         <activity android:name=".SecondActivity"></activity>
         <activity android:name=".AppleModelsPageActivity"></activity>
+        <activity android:name=".SamsungModelsPageActivity"></activity>
         <activity android:name=".XiaomiModelsPageActivity"></activity>
     </application>
 

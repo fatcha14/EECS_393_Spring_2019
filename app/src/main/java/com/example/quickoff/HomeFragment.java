@@ -42,6 +42,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                    Intent apple_intent = new Intent(view.getContext(), AppleModelsPageActivity.class);
                    startActivity(apple_intent);
                }
+               if (position == 1) {
+                   Intent samsung_intent = new Intent(view.getContext(), SamsungModelsPageActivity.class);
+                   startActivity(samsung_intent);
+               }
                if (position == 2) {
                    Intent xiaomi_intent = new Intent(view.getContext(), XiaomiModelsPageActivity.class);
                    startActivity(xiaomi_intent);
