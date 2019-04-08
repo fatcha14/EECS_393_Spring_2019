@@ -11,15 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ExpandableListView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
+
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = "HomeFragment";
@@ -27,16 +23,21 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     protected Button serachButton;
     protected TextInputEditText edittext;
 
+    String[] brands = {"Apple", "Samsung", "Xiaomi", "LG"};
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+
+        ListView brandsListView = (ListView) rootView.findViewById(R.id.brands_list);
+        ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, brands);
+        brandsListView.setAdapter(listAdapter);
+
         serachButton = rootView.findViewById(R.id.serach_button);
         serachButton.setOnClickListener(HomeFragment.this);
         edittext = rootView.findViewById(R.id.edittext);
-
-
-
 
         return rootView;
     }
