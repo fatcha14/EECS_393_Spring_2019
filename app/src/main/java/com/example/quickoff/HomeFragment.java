@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
@@ -34,6 +35,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         ListView brandsListView = (ListView) rootView.findViewById(R.id.brands_list);
         ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, brands);
         brandsListView.setAdapter(listAdapter);
+        brandsListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+           @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+               if (position == 0) {
+                   Intent intent = new Intent(view.getContext(), AppleModelsPageActivity.class);
+                   startActivity(intent);
+               }
+           }
+        });
 
         serachButton = rootView.findViewById(R.id.serach_button);
         serachButton.setOnClickListener(HomeFragment.this);
