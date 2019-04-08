@@ -11,7 +11,7 @@
     tools:context="com.example.quickoff.AppleModelsPageActivity">
 
     <ExpandableListView
-        android:id="@+id/apple_models_list"
+        android:id="@+id/xiaomi_models_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintStart_toStartOf="parent"

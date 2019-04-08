@@ -20,7 +20,7 @@ public class AppleModelsPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_apple_models_page);
 
-        listView = (ExpandableListView)findViewById(R.id.models_list);
+        listView = (ExpandableListView)findViewById(R.id.apple_models_list);
         initData();
         listAdapter = new MyExpandableListAdapter(this, models,listHash);
         listView.setAdapter(listAdapter);

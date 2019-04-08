@@ -18,9 +18,9 @@ public class XiaomiModelsPageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_apple_models_page);
+        setContentView(R.layout.activity_xiaomi_models_page);
 
-        listView = (ExpandableListView)findViewById(R.id.models_list);
+        listView = (ExpandableListView)findViewById(R.id.xiaomi_models_list);
         initData();
         listAdapter = new MyExpandableListAdapter(this, models,listHash);
         listView.setAdapter(listAdapter);

@@ -39,8 +39,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
            @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                if (position == 0) {
-                   Intent intent = new Intent(view.getContext(), AppleModelsPageActivity.class);
-                   startActivity(intent);
+                   Intent apple_intent = new Intent(view.getContext(), AppleModelsPageActivity.class);
+                   startActivity(apple_intent);
+               }
+               if (position == 2) {
+                   Intent xiaomi_intent = new Intent(view.getContext(), XiaomiModelsPageActivity.class);
+                   startActivity(xiaomi_intent);
                }
            }
         });
