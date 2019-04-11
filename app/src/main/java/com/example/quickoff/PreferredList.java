@@ -1,4 +1,5 @@
 package com.example.quickoff;
+import java.util.*;
 
 public class PreferredList {
     Node head; // the head of the preferred list
@@ -8,10 +9,8 @@ public class PreferredList {
     class Node{
         Product data;
         Node next;
-        Node before;
 
         Node(Product input){
-            before = null;
             data = input;
             next = null;
         }
@@ -31,22 +30,49 @@ public class PreferredList {
 
     public PreferredList add(Product input){
         Node input_node = new Node(input);
-        if(this.head == null)
+        if(this.head == null) {
             this.head = input_node;
-        else{
+            ptr = this.head;
+        }
+            else{
             ptr.next = input_node;
-            input_node.before = ptr;
             ptr = input_node;
         }
         return this;
     }
 
-    public void printList(){
-        Node indexNode = this.head;
-        while(indexNode != null){
-            System.out.print(indexNode.data.getName() + "  ");
-            System.out.println(indexNode.data.getPrice());
-            indexNode = indexNode.next;
+    public PreferredList remove(Node input){
+        input.data = input.next.data;
+        input.next.data = null;
+        input.next = input.next.next;
+        input.next.next = null;
+        return this;
+    }
+
+    public void remove(Product input){
+        Node index = this.head;
+        while(index != null || index.data != input){
+            index = index.next;
+        }
+        if(index != null) {
+            index.data = index.next.data;
+            index.next.data = null;
+            index.next = index.next.next;
+            index.next.next = null;
+        }
+        else{
+            System.out.print("No such item");
         }
     }
+
+    public String[] asArray(){
+        ArrayList<String> result = new <String>ArrayList();
+        Node indexNode = this.head;
+        while(indexNode != null){
+            result.add(indexNode.data.getName());
+            indexNode = indexNode.next;
+        }
+        return result.toArray(new String[0]);
+    }
+
 }
