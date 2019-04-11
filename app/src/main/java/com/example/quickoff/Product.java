@@ -6,6 +6,13 @@ public class Product {
     private double price;
     private String description;
 
+    public Product(){
+        source = false;
+        name = null;
+        price = 0.0;
+        description = null;
+    }
+
     public Product(boolean input_source, String input_name, double input_price, String input_description){
         source = input_source;
         name = input_name;

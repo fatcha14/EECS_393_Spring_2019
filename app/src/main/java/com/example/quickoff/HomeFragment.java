@@ -26,7 +26,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     String[] brands = {"Apple", "Samsung", "Xiaomi", "LG"};
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

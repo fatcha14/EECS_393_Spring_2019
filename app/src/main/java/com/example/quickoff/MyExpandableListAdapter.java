@@ -41,7 +41,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return storage.get(models.get(groupPosition)).get(childPosition); // i = Group Item , i1 = ChildItem
+        return storage.get(models.get(groupPosition)).get(childPosition);
     }
 
     @Override

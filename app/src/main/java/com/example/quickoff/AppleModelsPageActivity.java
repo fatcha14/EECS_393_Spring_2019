@@ -1,7 +1,9 @@
 package com.example.quickoff;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 
@@ -15,6 +17,8 @@ public class AppleModelsPageActivity extends AppCompatActivity {
     private ExpandableListAdapter listAdapter;
     private List<String> models;
     private HashMap<String,List<String>> listHash;
+    String[] apple_models = {"iPhone XS", "iPhone XS Max", "iPhone XR"};
+    String[] apple_storage = {"64GB", "128GB", "256GB", "512GB"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,31 +28,46 @@ public class AppleModelsPageActivity extends AppCompatActivity {
         initData();
         listAdapter = new MyExpandableListAdapter(this, models,listHash);
         listView.setAdapter(listAdapter);
+        listView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View view,
+                                        int groupPosition, int childPosition, long id) {
+                if (groupPosition == 0 && childPosition == 0) {
+                    Intent intent = new Intent(view.getContext(), SearchResultActivity.class);
+                    startActivity(intent);
+                }
+                if (groupPosition == 0 && childPosition == 1) {
+                    Intent intent = new Intent(view.getContext(), SearchResultActivity.class);
+                    startActivity(intent);
+                }
+                return false;
+            }
+        });
     }
 
     private void initData() {
         models = new ArrayList<>();
         listHash = new HashMap<>();
 
-        models.add("iPhone XS");
-        models.add("iPhone XS Max");
-        models.add("iPhone XR");
+        models.add(apple_models[0]);
+        models.add(apple_models[1]);
+        models.add(apple_models[2]);
 
         List<String> iphone_xs = new ArrayList<>();
-        iphone_xs.add("64GB");
-        iphone_xs.add("256GB");
-        iphone_xs.add("512GB");
+        iphone_xs.add(apple_storage[0]);
+        iphone_xs.add(apple_storage[2]);
+        iphone_xs.add(apple_storage[3]);
 
         List<String> iphone_xs_max = new ArrayList<>();
-        iphone_xs_max.add("64GB");
-        iphone_xs_max.add("256GB");
-        iphone_xs_max.add("512GB");
+        iphone_xs_max.add(apple_storage[0]);
+        iphone_xs_max.add(apple_storage[2]);
+        iphone_xs_max.add(apple_storage[3]);
 
 
         List<String> iphone_xr = new ArrayList<>();
-        iphone_xr.add("64GB");
-        iphone_xr.add("128GB");
-        iphone_xr.add("256GB");
+        iphone_xr.add(apple_storage[0]);
+        iphone_xr.add(apple_storage[1]);
+        iphone_xr.add(apple_storage[2]);
 
 
         listHash.put(models.get(0),iphone_xs);

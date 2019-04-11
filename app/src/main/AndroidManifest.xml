@@ -22,6 +22,7 @@
         <activity android:name=".AppleModelsPageActivity"></activity>
         <activity android:name=".SamsungModelsPageActivity"></activity>
         <activity android:name=".XiaomiModelsPageActivity"></activity>
+        <activity android:name=".SearchResultActivity"></activity>
     </application>
 
 </manifest>
