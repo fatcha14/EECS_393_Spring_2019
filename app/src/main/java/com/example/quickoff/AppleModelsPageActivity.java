@@ -32,14 +32,71 @@ public class AppleModelsPageActivity extends AppCompatActivity {
             @Override
             public boolean onChildClick(ExpandableListView parent, View view,
                                         int groupPosition, int childPosition, long id) {
+                // case for iphone xs 64GB
                 if (groupPosition == 0 && childPosition == 0) {
                     Intent intent = new Intent(view.getContext(), SearchResultActivity.class);
+                    String message[] = {apple_models[0], apple_storage[0]};
+                    intent.putExtra("iPhone XS 64GB", message);
                     startActivity(intent);
                 }
-                if (groupPosition == 0 && childPosition == 1) {
+                // case for iphone xs 256GB
+                if (groupPosition == 0 && childPosition == 2) {
                     Intent intent = new Intent(view.getContext(), SearchResultActivity.class);
+                    String message = apple_models[0] + " " + apple_storage[2];
+                    intent.putExtra("iPhone XS 256GB", message);
                     startActivity(intent);
                 }
+                // case for iphone xs 512GB
+                if (groupPosition == 0 && childPosition == 3) {
+                    Intent intent = new Intent(view.getContext(), SearchResultActivity.class);
+                    String message = apple_models[0] + " " + apple_storage[3];
+                    intent.putExtra("iPhone XS 512GB", message);
+                    startActivity(intent);
+                }
+                // case for iphone xs max 64GB
+                if (groupPosition == 1 && childPosition == 0) {
+                    Intent intent = new Intent(view.getContext(), SearchResultActivity.class);
+                    String message = apple_models[1] + " " + apple_storage[0];
+                    intent.putExtra("iPhone XS MAX 64GB", message);
+                    startActivity(intent);
+                }
+                // case for iphone xs max 256GB
+                if (groupPosition == 1 && childPosition == 2) {
+                    Intent intent = new Intent(view.getContext(), SearchResultActivity.class);
+                    String message = apple_models[1] + " " + apple_storage[2];
+                    intent.putExtra("iPhone XS MAX 256GB", message);
+                    startActivity(intent);
+                }
+                // case for iphone xs 512GB
+                if (groupPosition == 1 && childPosition == 3) {
+                    Intent intent = new Intent(view.getContext(), SearchResultActivity.class);
+                    String message = apple_models[1] + " " + apple_storage[3];
+                    intent.putExtra("iPhone XS MAX 512GB", message);
+                    startActivity(intent);
+                }
+                // case for iphone xr 64GB
+                if (groupPosition == 2 && childPosition == 0) {
+                    Intent intent = new Intent(view.getContext(), SearchResultActivity.class);
+                    String message = apple_models[2] + " " + apple_storage[0];
+                    intent.putExtra("iPhone XR 64GB", message);
+                    startActivity(intent);
+                }
+                // case for iphone xr 128GB
+                if (groupPosition == 2 && childPosition == 1) {
+                    Intent intent = new Intent(view.getContext(), SearchResultActivity.class);
+                    String message = apple_models[2] + " " + apple_storage[1];
+                    intent.putExtra("iPhone XR 256GB", message);
+                    startActivity(intent);
+                }
+                // case for iphone xr 256GB
+                if (groupPosition == 2 && childPosition == 2) {
+                    Intent intent = new Intent(view.getContext(), SearchResultActivity.class);
+                    String message = apple_models[2] + " " + apple_storage[2];
+                    intent.putExtra("iPhone XR 512GB", message);
+                    startActivity(intent);
+                }
+
+
                 return false;
             }
         });
