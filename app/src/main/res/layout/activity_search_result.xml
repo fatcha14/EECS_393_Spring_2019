@@ -143,11 +143,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="9dp"
         android:layout_marginEnd="9dp"
+        android:layout_marginBottom="223dp"
         android:background="#f1f1f1"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="408dp">
+        app:layout_constraintStart_toStartOf="parent">
 
         <TableRow>
 
@@ -275,7 +276,7 @@
         android:text="ADD TO THE PREFERRED LIST"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/amazon_table"/>
+        app:layout_constraintTop_toBottomOf="@+id/amazon_table" />
 
     <Button
         android:id="@+id/add_btn_tmall"

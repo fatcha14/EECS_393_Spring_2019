@@ -21,7 +21,6 @@ public class PreferredListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_preferred_list, container, false);
-        initData();
         String[] phone_name = preferredList.asArray();
         ListView phoneListView = (ListView) view.findViewById(R.id.preferred_list);
         ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, phone_name);
@@ -32,7 +31,6 @@ public class PreferredListFragment extends Fragment {
 
     private static void initData() {
 
-        preferredList.add(new Product(true, "iphone", 1200.00));
     }
 
 }

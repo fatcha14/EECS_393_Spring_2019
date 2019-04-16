@@ -59,7 +59,7 @@ public class SearchResultActivity extends AppCompatActivity {
 
         TextView tmp_price = (TextView) findViewById(R.id.price_amazon);
         String tmp_price_1 = tmp_price.getText().toString();
-        tmp_price_1.replaceAll("[^\\d.]", "");
+        tmp_price_1 = tmp_price_1.replaceAll("[^\\d.]", "");
         price = Double.parseDouble(tmp_price_1);
     }
 
