@@ -1,6 +1,7 @@
 package com.example.quickoff;
 
 import android.content.Context;
+import android.media.ExifInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -10,6 +11,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -80,6 +82,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawer.closeDrawer((GravityCompat.START));
         } else {
             super.onBackPressed();
+        }
+    }
+
+    public void findProduct(View view) {
+        MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
+        Product product = dbHandler.findHandler(searchinput.getText().toString());  // not ready
+        if (product != null) {
+            if(product.getSource() == true) {
+                price_amazon.setText(String.valueOf(product.getPrice()));
+                product_name_amazon.setText(product.getName());
+                source_amazon.setText("Amazon");
+            }
+            else{
+                price_Tmall.setText(String.valueOf(product.getPrice()));
+                name_Tmall.setText(product.getName());
+                source_Tmall.setText("Tmall");
+            }
+        } else {
+            product_name_amazon.setText("No such product");
+            product_name_tmall.setText("No such product");
         }
     }
 
