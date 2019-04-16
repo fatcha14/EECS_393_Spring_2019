@@ -19,6 +19,7 @@ public class AppleModelsPageActivity extends AppCompatActivity {
     private HashMap<String,List<String>> listHash;
     String[] apple_models = {"iPhone XS", "iPhone XS Max", "iPhone XR"};
     String[] apple_storage = {"64GB", "128GB", "256GB", "512GB"};
+    String company = "Apple";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +36,7 @@ public class AppleModelsPageActivity extends AppCompatActivity {
                 // case for iphone xs 64GB
                 if (groupPosition == 0 && childPosition == 0) {
                     Intent intent = new Intent(view.getContext(), SearchResultActivity.class);
-                    String message[] = {apple_models[0], apple_storage[0]};
+                    String message[] = {apple_models[0], apple_storage[0], company};
                     intent.putExtra("iPhone XS 64GB", message);
                     startActivity(intent);
                 }

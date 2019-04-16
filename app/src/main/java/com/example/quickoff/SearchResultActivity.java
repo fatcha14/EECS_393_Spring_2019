@@ -18,11 +18,14 @@ public class SearchResultActivity extends AppCompatActivity {
     private String company;
     private String source;
     private Double price;
-
+    // a dictionary to match with the intent sent by different activities
     String[] intent_dictionary =  {
             "iPhone XS 64GB", "iPhone XS 256GB", "iPhone XS 512GB",
             "iPhone XS MAX 64GB", "iPhone XS MAX 256GB", "iPhone XS 512GB",
-            "iPhone XR 64GB", "iPhone XR 128GB", "iPhone XR 256GB"
+            "iPhone XR 64GB", "iPhone XR 128GB", "iPhone XR 256GB",
+            "S10 128GB", "S10 256GB", "S10 512GB",
+            "S10+ 128GB", "S10+ 256GB", "S10+ 512GB", "S10+ 1TB",
+            "S10e 64GB", "S10e 128GB", "S10e 256GB"
     };
 
     @Override
@@ -111,8 +114,10 @@ public class SearchResultActivity extends AppCompatActivity {
         }
         TextView tv_product_name = findViewById(R.id.product_name_amazon);
         TextView tv_storage = findViewById(R.id.storage_amazon);
+        TextView tv_company = findViewById(R.id.company_amazon);
         tv_product_name.setText(message[0]);
         tv_storage.setText(message[1]);
+        tv_company.setText(message[2]);
     }
 
     private void set_table_tmall() {
@@ -125,8 +130,10 @@ public class SearchResultActivity extends AppCompatActivity {
         }
         TextView tv_product_name = findViewById(R.id.product_name_tmall);
         TextView tv_storage = findViewById(R.id.storage_tmall);
+        TextView tv_company = findViewById(R.id.company_tmall);
         tv_product_name.setText(message[0]);
         tv_storage.setText(message[1]);
+        tv_company.setText(message[2]);
     }
 
 }
