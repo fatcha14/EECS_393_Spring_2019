@@ -36,6 +36,7 @@ public class SearchResultActivity extends AppCompatActivity {
         actionBar.setTitle("Search Result");
 
         set_table_amazon();
+        set_table_tmall();
 
         add_btn_amazon = (Button) findViewById(R.id.add_btn_amaozn);
         getAdd_btn_tmall = (Button) findViewById(R.id.add_btn_tmall);
@@ -110,6 +111,20 @@ public class SearchResultActivity extends AppCompatActivity {
         }
         TextView tv_product_name = findViewById(R.id.product_name_amazon);
         TextView tv_storage = findViewById(R.id.storage_amazon);
+        tv_product_name.setText(message[0]);
+        tv_storage.setText(message[1]);
+    }
+
+    private void set_table_tmall() {
+        Intent intent = getIntent();
+        String message[] = new String[2];
+        for (int i = 0; i < intent_dictionary.length; i++) {
+            if (intent.getStringArrayExtra(intent_dictionary[i]) != null) {
+                message = intent.getStringArrayExtra(intent_dictionary[i]);
+            }
+        }
+        TextView tv_product_name = findViewById(R.id.product_name_tmall);
+        TextView tv_storage = findViewById(R.id.storage_tmall);
         tv_product_name.setText(message[0]);
         tv_storage.setText(message[1]);
     }
