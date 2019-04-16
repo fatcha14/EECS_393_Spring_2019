@@ -10,14 +10,14 @@ public class Product {
         source = false;
         name = null;
         price = 0.0;
-        description = null;
+
     }
 
-    public Product(boolean input_source, String input_name, double input_price, String input_description){
+    public Product(boolean input_source, String input_name, double input_price){
         source = input_source;
         name = input_name;
         price = input_price;
-        description = input_description;
+
     }
 
     public boolean getSource(){

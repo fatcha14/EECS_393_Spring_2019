@@ -9,7 +9,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
     //information of database
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "productDB.db";
-    public static final String TABLE_NAME = "Product";
+    public static final String TABLE_NAME = "results";
     public static final String COLUMN_ID = "productPrices";
     public static final String COLUMN_NAME = "productName";
     //initialize the database
