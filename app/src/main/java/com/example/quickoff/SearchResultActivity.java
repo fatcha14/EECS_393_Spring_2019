@@ -19,6 +19,12 @@ public class SearchResultActivity extends AppCompatActivity {
     private String source;
     private Double price;
 
+    String[] intent_dictionary =  {
+            "iPhone XS 64GB", "iPhone XS 256GB", "iPhone XS 512GB",
+            "iPhone XS MAX 64GB", "iPhone XS MAX 256GB", "iPhone XS 512GB",
+            "iPhone XR 64GB", "iPhone XR 128GB", "iPhone XR 256GB"
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,7 +102,12 @@ public class SearchResultActivity extends AppCompatActivity {
      */
     private void set_table_amazon() {
         Intent intent = getIntent();
-        String message[] = intent.getStringArrayExtra("iPhone XS 64GB");
+        String message[] = new String[2];
+        for (int i = 0; i < intent_dictionary.length; i++) {
+            if (intent.getStringArrayExtra(intent_dictionary[i]) != null) {
+                message = intent.getStringArrayExtra(intent_dictionary[i]);
+            }
+        }
         TextView tv_product_name = findViewById(R.id.product_name_amazon);
         TextView tv_storage = findViewById(R.id.storage_amazon);
         tv_product_name.setText(message[0]);

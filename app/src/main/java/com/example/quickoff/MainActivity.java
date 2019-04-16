@@ -85,24 +85,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    public void findProduct(View view) {
-        MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
-        Product product = dbHandler.findHandler(searchinput.getText().toString());  // not ready
-        if (product != null) {
-            if(product.getSource() == true) {
-                price_amazon.setText(String.valueOf(product.getPrice()));
-                product_name_amazon.setText(product.getName());
-                source_amazon.setText("Amazon");
-            }
-            else{
-                price_Tmall.setText(String.valueOf(product.getPrice()));
-                name_Tmall.setText(product.getName());
-                source_Tmall.setText("Tmall");
-            }
-        } else {
-            product_name_amazon.setText("No such product");
-            product_name_tmall.setText("No such product");
-        }
-    }
 
 }

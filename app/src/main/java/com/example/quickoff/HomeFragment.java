@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -71,5 +72,29 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             startActivity(intent);
         }
     }
+
+/*
+        public void findProduct(View view) {
+        MyDBHandler dbHandler = new MyDBHandler(getActivity(), null, null, 1);
+        Product product = dbHandler.findHandler(searchinput.getText().toString());  // not ready
+        if (product != null) {
+            if(product.getSource() == true) {
+                TextView price_amazon = (TextView) getActivity().findViewById(R.id.price_amazon);
+                price_amazon.setText(String.valueOf(product.getPrice()));
+                product_name_amazon.setText(product.getName());
+                source_amazon.setText("Amazon");
+            }
+            else{
+                price_Tmall.setText(String.valueOf(product.getPrice()));
+                name_Tmall.setText(product.getName());
+                source_Tmall.setText("Tmall");
+            }
+        } else {
+
+            product_name_amazon.setText("No such product");
+            product_name_tmall.setText("No such product");
+        }
+    }
+*/
 
 }

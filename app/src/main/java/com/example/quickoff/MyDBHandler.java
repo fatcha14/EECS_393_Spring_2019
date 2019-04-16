@@ -48,7 +48,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.close();
     }
     public Product findHandler(String productname) {
-        String query = "Select * FROM " + TABLE_NAME + "WHERE" + COLUMN_NAME + " = " + "'" + productname + "'";
+        String query = "Select * FROM " + TABLE_NAME + "WHERE" + COLUMN_NAME + " LIKE " + "'%" + productname + "%'";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         Product product = new Product();
@@ -65,7 +65,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
     }
     public boolean deleteHandler(int ID) {
         boolean result = false;
-        String query = "Select*FROM" + TABLE_NAME + "WHERE" + COLUMN_ID + "= '" + String.valueOf(ID) + "'";
+        String query = " M" + TABLE_NAME + "WHERE" + COLUMN_ID + "= '" + String.valueOf(ID) + "'";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         Product product = new Product();
