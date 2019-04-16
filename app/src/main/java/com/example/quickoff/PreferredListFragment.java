@@ -16,8 +16,6 @@ public class PreferredListFragment extends Fragment {
 
     static PreferredList preferredList = new PreferredList();
 
-    String tmp1;
-    String tmp2;
 
     @Nullable
     @Override

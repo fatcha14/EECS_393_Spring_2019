@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -50,6 +51,7 @@ public class SearchResultActivity extends AppCompatActivity {
             public void onClick(View v) {
                 get_table_amazon();
                 PreferredListFragment.preferredList.add(new Product(true, product_name, price));
+                Toast.makeText(SearchResultActivity.this, "Add Successfully", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -58,6 +60,7 @@ public class SearchResultActivity extends AppCompatActivity {
             public void onClick(View v) {
                 get_table_tmall();
                 PreferredListFragment.preferredList.add(new Product(false, product_name, price));
+                Toast.makeText(SearchResultActivity.this, "Add Successfully", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -106,7 +109,7 @@ public class SearchResultActivity extends AppCompatActivity {
      */
     private void set_table_amazon() {
         Intent intent = getIntent();
-        String message[] = new String[2];
+        String message[] = new String[3];
         for (int i = 0; i < intent_dictionary.length; i++) {
             if (intent.getStringArrayExtra(intent_dictionary[i]) != null) {
                 message = intent.getStringArrayExtra(intent_dictionary[i]);
@@ -122,7 +125,7 @@ public class SearchResultActivity extends AppCompatActivity {
 
     private void set_table_tmall() {
         Intent intent = getIntent();
-        String message[] = new String[2];
+        String message[] = new String[3];
         for (int i = 0; i < intent_dictionary.length; i++) {
             if (intent.getStringArrayExtra(intent_dictionary[i]) != null) {
                 message = intent.getStringArrayExtra(intent_dictionary[i]);
