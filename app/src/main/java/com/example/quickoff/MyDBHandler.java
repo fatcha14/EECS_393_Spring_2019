@@ -45,14 +45,14 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return result;
     }
     public Product findHandler(String productname) {
-        String query = "Select * FROM " + TABLE_NAME + " WHERE " + COLUMN_PHONE_NAME +" LIKE " + "'%" + productname + "%'";
+        String query = "Select * FROM " + TABLE_NAME + " WHERE " + COLUMN_SOURCE + " LIKE " + "'%Amazon%'" + "AND " + COLUMN_PHONE_NAME +" LIKE " + "'%" + productname + "%'";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         Product product = new Product();
         if (cursor.moveToFirst()) {
             cursor.moveToFirst();
-            product.setPrice(cursor.getString(0));
-            product.setName(cursor.getString(1));
+            product.setName(cursor.getString(0));
+            product.setPrice(cursor.getString(1));
             product.setDescription(cursor.getString(2));
             String source = cursor.getString(3);
             if(source.equals("Amazon"))
