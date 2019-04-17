@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "71880384192",
+    "firebase_url": "https://quickoff-45a6a.firebaseio.com",
+    "project_id": "quickoff-45a6a",
+    "storage_bucket": "quickoff-45a6a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:71880384192:android:f52bcf76720fbecb",
+        "android_client_info": {
+          "package_name": "com.example.quickoff"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "71880384192-8aecpnh0p4r02b22anq375k7572ikek5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.quickoff",
+            "certificate_hash": "5a4d72b62eb1591c1ae31be47bee3e8597f03d00"
+          }
+        },
+        {
+          "client_id": "71880384192-frql4p6227lh7urlquko2putr1nfr01g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVbOKMnjqmn3zqXlnVMprioEz6lsawgyY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "71880384192-frql4p6227lh7urlquko2putr1nfr01g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
