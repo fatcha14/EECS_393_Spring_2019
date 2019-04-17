@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +46,7 @@ public class SearchResultActivity extends AppCompatActivity {
         add_btn_amazon = (Button) findViewById(R.id.add_btn_amaozn);
         getAdd_btn_tmall = (Button) findViewById(R.id.add_btn_tmall);
 
+        findProduct();
 
         add_btn_amazon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,5 +140,54 @@ public class SearchResultActivity extends AppCompatActivity {
         tv_storage.setText(message[1]);
         tv_company.setText(message[2]);
     }
+
+    public void findProduct() {
+        MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
+
+        Intent intent = getIntent();
+        String message =  intent.getStringExtra("iPhone XS 64GB");
+
+        Product product = dbHandler.findHandler(message);  // not ready
+        if (product != null) {
+            if(product.getSource()) {
+                TextView name_amazon = (TextView) this.findViewById(R.id.product_name_amazon);
+                TextView price_amazon = (TextView) this.findViewById(R.id.price_amazon);
+                TextView company_amazon = (TextView) this.findViewById(R.id.company_amazon);
+                TextView source_amazon = (TextView) this.findViewById(R.id.source_amazon);
+                name_amazon.setText(product.getName());
+                price_amazon.setText(String.valueOf(product.getPrice()));
+                company_amazon.setText(product.getDescription());
+                source_amazon.setText("Amazon");
+            }
+            else{
+                TextView name_tmall = (TextView) this.findViewById(R.id.product_name_tmall);
+                TextView price_tmall = (TextView) this.findViewById(R.id.price_tmall);
+                TextView company_tmall = (TextView) this.findViewById(R.id.company_tmall);
+                TextView source_tmall = (TextView) this.findViewById(R.id.source_tmall);
+                name_tmall.setText(product.getName());
+                price_tmall.setText(String.valueOf(product.getPrice()));
+                company_tmall.setText(product.getDescription());
+                source_tmall.setText("Tmall");
+            }
+        } else {
+            TextView name_amazon = (TextView) this.findViewById(R.id.product_name_amazon);
+            TextView price_amazon = (TextView) this.findViewById(R.id.price_amazon);
+            TextView company_amazon = (TextView) this.findViewById(R.id.company_amazon);
+            TextView source_amazon = (TextView) this.findViewById(R.id.source_amazon);
+            TextView name_tmall = (TextView) this.findViewById(R.id.product_name_tmall);
+            TextView price_tmall = (TextView) this.findViewById(R.id.price_tmall);
+            TextView company_tmall = (TextView) this.findViewById(R.id.company_tmall);
+            TextView source_tmall = (TextView) this.findViewById(R.id.source_tmall);
+            name_amazon.setText("No such product");
+            price_amazon.setText("No such product");
+            company_amazon.setText("No such product");
+            source_amazon.setText("Amazon");
+            name_tmall.setText("No such product");
+            price_tmall.setText("No such product");
+            company_tmall.setText("No such product");
+            source_tmall.setText("Tmall");
+        }
+    }
+
 
 }

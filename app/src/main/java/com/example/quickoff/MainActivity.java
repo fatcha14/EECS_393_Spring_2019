@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Context mContext;
 
     private List<Product> inputlist;
+
+
     /**
      * 三个fragment对应的tags
      *
@@ -60,9 +62,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             navigationView.setCheckedItem(R.id.home_button);
         }
          initCsv();
-
+        updataDB();
     }
 
+    public void updataDB(){
+        MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
+        for(int i = 0; i < inputlist.size(); i++){
+            dbHandler.addHandler(inputlist.get(i));
+        }
+    }
     //对应这里，点击进入对应的fragment
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {

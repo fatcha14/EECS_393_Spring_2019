@@ -14,9 +14,9 @@ public class MyDBHandler extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "productDB.db";
     public static final String TABLE_NAME = "results";
-    public static final String COLUMN_PHONE_NAME = "\"Phone Name\"";
+    public static final String COLUMN_PHONE_NAME = "Phone_Name";
     public static final String COLUMN_PRICE = "Price";
-    public static final String COLUMN_COMPANY = "Company Name";
+    public static final String COLUMN_COMPANY = "Company_Name";
     public static final String COLUMN_SOURCE = "Source";
     //initialize the database
     public MyDBHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -24,8 +24,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + "(" + COLUMN_PHONE_NAME +
-                "TEXT," + COLUMN_PRICE + "TEXT" + COLUMN_COMPANY + "TEXT" + COLUMN_SOURCE + "Text)";
+        String CREATE_TABLE = "CREATE TABLE results (Phone_Name TEXT, Price TEXT, Company_Name TEXT, Source TEXT);";
         db.execSQL(CREATE_TABLE);
     }
     @Override
@@ -46,7 +45,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return result;
     }
     public Product findHandler(String productname) {
-        String query = "Select * FROM " + TABLE_NAME + " WHERE "  + COLUMN_PHONE_NAME + " LIKE " + "'%" + productname + "%'";
+        String query = "Select * FROM " + TABLE_NAME + " WHERE " + COLUMN_PHONE_NAME +" LIKE " + "'%" + productname + "%'";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         Product product = new Product();
@@ -68,13 +67,16 @@ public class MyDBHandler extends SQLiteOpenHelper {
     }
 
     public void addHandler(Product product) {
-        ContentValues values = new ContentValues();
-        values.put(COLUMN_PRICE, product.getPrice());
+        ContentValues values = new ContentValues(4);
         values.put(COLUMN_PHONE_NAME, product.getName());
+        values.put(COLUMN_PRICE, product.getPrice());
         values.put(COLUMN_COMPANY, product.getDescription());
-        if(product.getSource())
-        values.put(COLUMN_SOURCE, "Amazon");
-        else {values.put(COLUMN_SOURCE, "Tmall");}
+        if(product.getSource()) {
+            values.put(COLUMN_SOURCE, "Amazon");
+        }
+        else {
+            values.put(COLUMN_SOURCE, "Tmall");
+        }
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(TABLE_NAME, null, values);
         db.close();
