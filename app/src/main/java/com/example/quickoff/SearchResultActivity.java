@@ -18,7 +18,7 @@ public class SearchResultActivity extends AppCompatActivity {
     private String product_name;
     private String company;
     private String source;
-    private Double price;
+    private String price;
     // a dictionary to match with the intent sent by different activities
     String[] intent_dictionary =  {
             "iPhone XS 64GB", "iPhone XS 256GB", "iPhone XS 512GB",
@@ -82,7 +82,7 @@ public class SearchResultActivity extends AppCompatActivity {
         TextView tmp_price = (TextView) findViewById(R.id.price_amazon);
         String tmp_price_1 = tmp_price.getText().toString();
         tmp_price_1 = tmp_price_1.replaceAll("[^\\d.]", "");
-        price = Double.parseDouble(tmp_price_1);
+        price = tmp_price_1;
     }
 
     /*
@@ -101,7 +101,7 @@ public class SearchResultActivity extends AppCompatActivity {
         TextView tmp_price = (TextView) findViewById(R.id.price_tmall);
         String tmp_price_1 = tmp_price.getText().toString();
         tmp_price_1 = tmp_price_1.replaceAll("[^\\d.]", "");
-        price = Double.parseDouble(tmp_price_1);
+        price = tmp_price_1;
     }
 
     /*

@@ -10,8 +10,17 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -19,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private Context mContext;
 
-
+    private List<Product> inputlist;
     /**
      * 三个fragment对应的tags
      *
@@ -50,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     new HomeFragment(), TAG_HOME).commit();
             navigationView.setCheckedItem(R.id.home_button);
         }
-
+         initCsv();
 
     }
 
@@ -85,5 +94,39 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+
+    public void initCsv() {
+        InputStream inputStream = getResources().openRawResource(R.raw.results);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
+        inputlist = new ArrayList<>();
+        String line = "";
+        try {
+            while ((line = reader.readLine()) != null) {
+                // split by ','
+
+
+                String[] tokens = line.split(",");
+
+                // read data
+                Product resultsSample = new Product();
+                resultsSample.setName(tokens[0]);
+                resultsSample.setPrice(tokens[1]);
+                resultsSample.setDescription(tokens[2]);
+                if(tokens[3].equals(("Amazon"))){
+                    resultsSample.setSource(true);
+                }
+                else {
+                    resultsSample.setSource(false);
+                }
+                inputlist.add(resultsSample);
+
+                Log.d("MyActivity", "Just Created" + resultsSample.getName());
+            }
+        }
+        catch (IOException e) {
+            Log.wtf("MyActivity", "Error reading data file on line" + line, e);
+            e.printStackTrace();
+        }
+    }
 
 }

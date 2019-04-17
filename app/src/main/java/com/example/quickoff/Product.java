@@ -3,17 +3,16 @@ package com.example.quickoff;
 public class Product {
     private boolean source; // when this boolean field contains TRUE, then the product is from Amazon.If this field contains FALSE,then the product is from Tmall.
     private String name;
-    private double price;
+    private String price;
     private String description;
 
     public Product(){
         source = false;
         name = null;
-        price = 0.0;
 
     }
 
-    public Product(boolean input_source, String input_name, double input_price){
+    public Product(boolean input_source, String input_name, String input_price){
         source = input_source;
         name = input_name;
         price = input_price;
@@ -36,11 +35,11 @@ public class Product {
         this.name = input;
     }
 
-    public double getPrice(){
+    public String getPrice(){
         return this.price;
     }
 
-    public void setPrice(double input){
+    public void setPrice(String input){
         this.price = input;
     }
 

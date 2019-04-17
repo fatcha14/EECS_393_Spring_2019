@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -64,6 +65,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         if (view.getId() == R.id.serach_button) {
             //这些操作，同时传递参数
+            findProduct(view);
             String name = edittext.getText().toString();
             Log.i(TAG, "onClick: edittext===" + name);
             Toast.makeText(this.getActivity(), name, Toast.LENGTH_LONG).show();
@@ -73,28 +75,51 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-/*
+
         public void findProduct(View view) {
         MyDBHandler dbHandler = new MyDBHandler(getActivity(), null, null, 1);
-        Product product = dbHandler.findHandler(searchinput.getText().toString());  // not ready
+        EditText search_input = (EditText) getActivity().findViewById(R.id.edittext);
+        Product product = dbHandler.findHandler(search_input.getText().toString());  // not ready
         if (product != null) {
-            if(product.getSource() == true) {
+            if(product.getSource()) {
+                TextView name_amazon = (TextView) getActivity().findViewById(R.id.product_name_amazon);
                 TextView price_amazon = (TextView) getActivity().findViewById(R.id.price_amazon);
+                TextView company_amazon = (TextView) getActivity().findViewById(R.id.company_amazon);
+                TextView source_amazon = (TextView) getActivity().findViewById(R.id.source_amazon);
+                name_amazon.setText(product.getName());
                 price_amazon.setText(String.valueOf(product.getPrice()));
-                product_name_amazon.setText(product.getName());
+                company_amazon.setText(product.getDescription());
                 source_amazon.setText("Amazon");
             }
             else{
-                price_Tmall.setText(String.valueOf(product.getPrice()));
-                name_Tmall.setText(product.getName());
-                source_Tmall.setText("Tmall");
+                TextView name_tmall = (TextView) getActivity().findViewById(R.id.product_name_tmall);
+                TextView price_tmall = (TextView) getActivity().findViewById(R.id.price_tmall);
+                TextView company_tmall = (TextView) getActivity().findViewById(R.id.company_tmall);
+                TextView source_tmall = (TextView) getActivity().findViewById(R.id.source_tmall);
+                name_tmall.setText(product.getName());
+                price_tmall.setText(String.valueOf(product.getPrice()));
+                company_tmall.setText(product.getDescription());
+                source_tmall.setText("Tmall");
             }
         } else {
-
-            product_name_amazon.setText("No such product");
-            product_name_tmall.setText("No such product");
+            TextView name_amazon = (TextView) getActivity().findViewById(R.id.product_name_amazon);
+            TextView price_amazon = (TextView) getActivity().findViewById(R.id.price_amazon);
+            TextView company_amazon = (TextView) getActivity().findViewById(R.id.company_amazon);
+            TextView source_amazon = (TextView) getActivity().findViewById(R.id.source_amazon);
+            TextView name_tmall = (TextView) getActivity().findViewById(R.id.product_name_tmall);
+            TextView price_tmall = (TextView) getActivity().findViewById(R.id.price_tmall);
+            TextView company_tmall = (TextView) getActivity().findViewById(R.id.company_tmall);
+            TextView source_tmall = (TextView) getActivity().findViewById(R.id.source_tmall);
+            name_amazon.setText("No such product");
+            price_amazon.setText("No such product");
+            company_amazon.setText("No such product");
+            source_amazon.setText("Amazon");
+            name_tmall.setText("No such product");
+            price_tmall.setText("No such product");
+            company_tmall.setText("No such product");
+            source_tmall.setText("Tmall");
         }
     }
-*/
+
 
 }
