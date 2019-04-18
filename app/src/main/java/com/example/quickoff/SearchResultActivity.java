@@ -149,14 +149,29 @@ public class SearchResultActivity extends AppCompatActivity {
 
         Product product = dbHandler.findHandler(message);  // not ready
 
-                TextView name_amazon = (TextView) this.findViewById(R.id.product_name_amazon);
-                TextView price_amazon = (TextView) this.findViewById(R.id.price_amazon);
-                TextView company_amazon = (TextView) this.findViewById(R.id.company_amazon);
-                TextView source_amazon = (TextView) this.findViewById(R.id.source_amazon);
-                name_amazon.setText(message);
-                price_amazon.setText(String.valueOf(product.getPrice()));
-                company_amazon.setText(product.getDescription());
-                source_amazon.setText("Amazon");
+        TextView name_amazon = (TextView) this.findViewById(R.id.product_name_amazon);
+        TextView price_amazon = (TextView) this.findViewById(R.id.price_amazon);
+        TextView company_amazon = (TextView) this.findViewById(R.id.company_amazon);
+        TextView source_amazon = (TextView) this.findViewById(R.id.source_amazon);
+        name_amazon.setText(message);
+        price_amazon.setText(String.valueOf(product.getPrice()));
+        company_amazon.setText(product.getDescription());
+        source_amazon.setText("Amazon");
+
+    }
+
+    public String findStorage(String input){
+        int index = 0;
+        boolean rem = false;
+        for(int i = 0; i<input.length(); i++){
+            if(input.charAt(i) == 'G') {
+                rem = true;
+            }
+            if(input.charAt(i) == 'B' || rem == true){
+                index  = i;
+            }
+
+        }
 
     }
 
