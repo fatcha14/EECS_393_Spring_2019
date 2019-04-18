@@ -113,50 +113,58 @@ public class SearchResultActivity extends AppCompatActivity {
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
         Intent intent = getIntent();
         String message[] = new String[3];
+        boolean not_null = false;
         for (int i = 0; i < intent_dictionary.length; i++) {
             if (intent.getStringArrayExtra(intent_dictionary[i]) != null) {
                 message = intent.getStringArrayExtra(intent_dictionary[i]);
+                not_null = true;
             }
         }
-        StringBuilder sb = new StringBuilder();
-        sb.append(message[0]);
-        sb.append(" ");
-        sb.append(message[1]);
-        String search_query = sb.toString();
-        Product amazon_product = dbHandler.findAmazonHandler(search_query);
-        TextView tv_product_name = findViewById(R.id.product_name_amazon);
-        TextView tv_storage = findViewById(R.id.storage_amazon);
-        TextView tv_company = findViewById(R.id.company_amazon);
-        TextView tv_price =  findViewById(R.id.price_amazon);
-        tv_product_name.setText(message[0]);
-        tv_storage.setText(message[1]);
-        tv_company.setText(message[2]);
-        tv_price.setText(String.valueOf(amazon_product.getPrice()));
+        if (not_null) {
+            StringBuilder sb = new StringBuilder();
+            sb.append(message[0]);
+            sb.append(" ");
+            sb.append(message[1]);
+            String search_query = sb.toString();
+            Product amazon_product = dbHandler.findAmazonHandler(search_query);
+            TextView tv_product_name = findViewById(R.id.product_name_amazon);
+            TextView tv_storage = findViewById(R.id.storage_amazon);
+            TextView tv_company = findViewById(R.id.company_amazon);
+            TextView tv_price = findViewById(R.id.price_amazon);
+            tv_product_name.setText(message[0]);
+            tv_storage.setText(message[1]);
+            tv_company.setText(message[2]);
+            tv_price.setText(String.valueOf(amazon_product.getPrice()));
+        }
     }
 
     private void set_table_tmall() {
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
         Intent intent = getIntent();
         String message[] = new String[3];
+        boolean not_null = false;
         for (int i = 0; i < intent_dictionary.length; i++) {
             if (intent.getStringArrayExtra(intent_dictionary[i]) != null) {
                 message = intent.getStringArrayExtra(intent_dictionary[i]);
+                not_null = true;
             }
         }
-        StringBuilder sb = new StringBuilder();
-        sb.append(message[0]);
-        sb.append(" ");
-        sb.append(message[1]);
-        String search_query = sb.toString();
-        Product tmall_product = dbHandler.findTmallHandler(search_query);
-        TextView tv_product_name = findViewById(R.id.product_name_tmall);
-        TextView tv_storage = findViewById(R.id.storage_tmall);
-        TextView tv_company = findViewById(R.id.company_tmall);
-        TextView tv_price =  findViewById(R.id.price_tmall);
-        tv_product_name.setText(message[0]);
-        tv_storage.setText(message[1]);
-        tv_company.setText(message[2]);
-        tv_price.setText(String.valueOf(tmall_product.getPrice()));
+        if (not_null) {
+            StringBuilder sb = new StringBuilder();
+            sb.append(message[0]);
+            sb.append(" ");
+            sb.append(message[1]);
+            String search_query = sb.toString();
+            Product tmall_product = dbHandler.findTmallHandler(search_query);
+            TextView tv_product_name = findViewById(R.id.product_name_tmall);
+            TextView tv_storage = findViewById(R.id.storage_tmall);
+            TextView tv_company = findViewById(R.id.company_tmall);
+            TextView tv_price = findViewById(R.id.price_tmall);
+            tv_product_name.setText(message[0]);
+            tv_storage.setText(message[1]);
+            tv_company.setText(message[2]);
+            tv_price.setText(String.valueOf(tmall_product.getPrice()));
+        }
     }
 
     public void findProduct() {
