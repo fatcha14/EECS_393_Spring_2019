@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.util.Arrays;
+
 public class SearchResultActivity extends AppCompatActivity {
 
     private Button add_btn_amazon;
@@ -108,6 +110,7 @@ public class SearchResultActivity extends AppCompatActivity {
     A method to initialize the amazon table
      */
     private void set_table_amazon() {
+        MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
         Intent intent = getIntent();
         String message[] = new String[3];
         for (int i = 0; i < intent_dictionary.length; i++) {
@@ -115,15 +118,24 @@ public class SearchResultActivity extends AppCompatActivity {
                 message = intent.getStringArrayExtra(intent_dictionary[i]);
             }
         }
+        StringBuilder sb = new StringBuilder();
+        sb.append(message[0]);
+        sb.append(" ");
+        sb.append(message[1]);
+        String search_query = sb.toString();
+        Product amazon_product = dbHandler.findAmazonHandler(search_query);
         TextView tv_product_name = findViewById(R.id.product_name_amazon);
         TextView tv_storage = findViewById(R.id.storage_amazon);
         TextView tv_company = findViewById(R.id.company_amazon);
+        TextView tv_price =  findViewById(R.id.price_amazon);
         tv_product_name.setText(message[0]);
         tv_storage.setText(message[1]);
         tv_company.setText(message[2]);
+        tv_price.setText(String.valueOf(amazon_product.getPrice()));
     }
 
     private void set_table_tmall() {
+        MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
         Intent intent = getIntent();
         String message[] = new String[3];
         for (int i = 0; i < intent_dictionary.length; i++) {
@@ -131,46 +143,82 @@ public class SearchResultActivity extends AppCompatActivity {
                 message = intent.getStringArrayExtra(intent_dictionary[i]);
             }
         }
+        StringBuilder sb = new StringBuilder();
+        sb.append(message[0]);
+        sb.append(" ");
+        sb.append(message[1]);
+        String search_query = sb.toString();
+        Product tmall_product = dbHandler.findTmallHandler(search_query);
         TextView tv_product_name = findViewById(R.id.product_name_tmall);
         TextView tv_storage = findViewById(R.id.storage_tmall);
         TextView tv_company = findViewById(R.id.company_tmall);
+        TextView tv_price =  findViewById(R.id.price_tmall);
         tv_product_name.setText(message[0]);
         tv_storage.setText(message[1]);
         tv_company.setText(message[2]);
+        tv_price.setText(String.valueOf(tmall_product.getPrice()));
     }
 
     public void findProduct() {
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
 
         Intent intent = getIntent();
-        String message =  intent.getStringExtra("iPhone XS 64GB");
+        if (intent.getStringExtra("iPhone XS 64GB") != null) {
+            String message = intent.getStringExtra("iPhone XS 64GB");
 
-        Product product = dbHandler.findHandler(message);  // not ready
+            Product amazon_product = dbHandler.findAmazonHandler(message);  // not ready
 
-        TextView name_amazon = (TextView) this.findViewById(R.id.product_name_amazon);
-        TextView price_amazon = (TextView) this.findViewById(R.id.price_amazon);
-        TextView company_amazon = (TextView) this.findViewById(R.id.company_amazon);
-        TextView source_amazon = (TextView) this.findViewById(R.id.source_amazon);
-        name_amazon.setText(message);
-        price_amazon.setText(String.valueOf(product.getPrice()));
-        company_amazon.setText(product.getDescription());
-        source_amazon.setText("Amazon");
+            TextView name_amazon = (TextView) this.findViewById(R.id.product_name_amazon);
+            TextView price_amazon = (TextView) this.findViewById(R.id.price_amazon);
+            TextView company_amazon = (TextView) this.findViewById(R.id.company_amazon);
+            TextView source_amazon = (TextView) this.findViewById(R.id.source_amazon);
+            TextView storage_amazon = (TextView) this.findViewById(R.id.storage_amazon);
+            name_amazon.setText(message);
+            price_amazon.setText(String.valueOf(amazon_product.getPrice()));
+            company_amazon.setText(amazon_product.getDescription());
+            source_amazon.setText("Amazon");
+            storage_amazon.setText(findStorage(amazon_product.getName()));
 
+            Product tmall_product = dbHandler.findTmallHandler(message);  // not ready
+
+            TextView name_tmall = (TextView) this.findViewById(R.id.product_name_tmall);
+            TextView price_tmall = (TextView) this.findViewById(R.id.price_tmall);
+            TextView company_tmall = (TextView) this.findViewById(R.id.company_tmall);
+            TextView source_tmall = (TextView) this.findViewById(R.id.source_tmall);
+            TextView storage_tmall = (TextView) this.findViewById(R.id.storage_tmall);
+            name_tmall.setText(message);
+            price_tmall.setText(String.valueOf(tmall_product.getPrice()));
+            company_tmall.setText(tmall_product.getDescription());
+            source_tmall.setText("Tmall");
+            storage_tmall.setText(findStorage(tmall_product.getName()));
+        }
     }
 
     public String findStorage(String input){
         int index = 0;
+        int[] number = new int[3];
         boolean rem = false;
         for(int i = 0; i<input.length(); i++){
             if(input.charAt(i) == 'G') {
-                rem = true;
+                index = i;
             }
-            if(input.charAt(i) == 'B' || rem == true){
-                index  = i;
+            if(input.charAt(i) == 'B' && i == index + 1){
+                break;
             }
-
         }
 
+        number[2] = Character.getNumericValue(input.charAt(index-1));
+        number[1] = Character.getNumericValue(input.charAt(index-2));
+        char check = input.charAt(index - 3);
+        if(check == ' ' || check == '(' || check ==  '+'){
+            number[0] =  0;
+        }
+        else{
+            number[0] = Character.getNumericValue(check);
+        }
+        String result = Arrays.toString(number);
+        result = result.replaceAll(", ", "").replace("[", "").replace("]", "");
+        return  result;
     }
 
 
