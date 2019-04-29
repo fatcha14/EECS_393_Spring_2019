@@ -77,7 +77,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
             product.setPrice(cursor.getString(1));
             product.setDescription(cursor.getString(2));
             String source = cursor.getString(3);
-            if(source.equals("Amazon"))
+            if(source.equals("tmall"))
                 product.setSource(true);
             else{product.setSource(false);}
             cursor.close();

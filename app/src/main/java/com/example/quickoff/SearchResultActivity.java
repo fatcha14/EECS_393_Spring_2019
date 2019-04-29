@@ -210,7 +210,7 @@ public class SearchResultActivity extends AppCompatActivity {
             if(input.charAt(i) == 'G') {
                 index = i;
             }
-            if(input.charAt(i) == 'B' && i == index + 1){
+            else if(input.charAt(i) == 'B' && i == index + 1){
                 break;
             }
         }
