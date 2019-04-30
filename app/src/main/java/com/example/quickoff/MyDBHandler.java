@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+//a class that create database and override various functions
 public class MyDBHandler extends SQLiteOpenHelper {
     //information of database
     private static final int DATABASE_VERSION = 1;
@@ -22,13 +23,17 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public MyDBHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
     }
+
+    // initialize the database
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_TABLE = "CREATE TABLE results (Phone_Name TEXT, Price TEXT, Company_Name TEXT, Source TEXT);";
         db.execSQL(CREATE_TABLE);
     }
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {}
+
     public String loadHandler() {
         String result = "";
         String query = "Select * FROM " + TABLE_NAME;
@@ -44,7 +49,11 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.close();
         return result;
     }
+
+    // this method tries to find a given product name in the product name column of the database
+    // and create a product instance to store all the information
     public Product findAmazonHandler(String productname) {
+        // find products that are from Amazon in the database
         String query = "Select * FROM " + TABLE_NAME + " WHERE " + COLUMN_SOURCE + " LIKE " + "'%Amazon%'" + "AND " + COLUMN_PHONE_NAME +" LIKE " + "'%" + productname + "%'";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
@@ -66,6 +75,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return product;
     }
 
+    // this method tries to find a given product name in the product name column of the database
+    // and create a product instance to store all the information
     public Product findTmallHandler(String productname) {
         String query = "Select * FROM " + TABLE_NAME + " WHERE " + COLUMN_SOURCE + " LIKE " + "'%tmall%'" + "AND " + COLUMN_PHONE_NAME +" LIKE " + "'%" + productname + "%'";
         SQLiteDatabase db = this.getWritableDatabase();
@@ -88,7 +99,9 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return product;
     }
 
+    // this method takes a instance of product as input and add it to the database
     public void addHandler(Product product) {
+        // create a ContentValues instance and store all the information about input product in it
         ContentValues values = new ContentValues(4);
         values.put(COLUMN_PHONE_NAME, product.getName());
         values.put(COLUMN_PRICE, product.getPrice());
@@ -99,6 +112,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         else {
             values.put(COLUMN_SOURCE, "Tmall");
         }
+        // put the ContentValues in the database
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(TABLE_NAME, null, values);
         db.close();
