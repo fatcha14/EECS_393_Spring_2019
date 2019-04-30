@@ -27,9 +27,10 @@ public class SearchResultActivity extends AppCompatActivity {
             "iPhone XS 64GB", "iPhone XS 256GB", "iPhone XS 512GB",
             "iPhone XS MAX 64GB", "iPhone XS MAX 256GB", "iPhone XS 512GB",
             "iPhone XR 64GB", "iPhone XR 128GB", "iPhone XR 256GB",
-            "S10 128GB", "S10 256GB", "S10 512GB",
-            "S10+ 128GB", "S10+ 256GB", "S10+ 512GB", "S10+ 1TB",
-            "S10e 64GB", "S10e 128GB", "S10e 256GB"
+            "S10 128GB", "S10 512GB",
+            "S10+ 128GB", "S10+ 512GB",
+            "S10e 128GB", "S10e 256GB",
+            "Mi9 128GB", "Mi9 256GB"
     };
 
     @Override
@@ -48,6 +49,7 @@ public class SearchResultActivity extends AppCompatActivity {
 
         findProduct();
 
+        // add selected amazon product to the preferred list
         add_btn_amazon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,6 +59,7 @@ public class SearchResultActivity extends AppCompatActivity {
             }
         });
 
+        // add selected tmall product to the preferred list
         getAdd_btn_tmall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -138,11 +141,16 @@ public class SearchResultActivity extends AppCompatActivity {
         }
     }
 
+    /*
+    A method to initialize the tmall table
+    */
     private void set_table_tmall() {
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
         Intent intent = getIntent();
         String message[] = new String[3];
         boolean not_null = false;
+        // check if the received intents match with intent dictionary to avoid retrieving
+        // null object in the later search
         for (int i = 0; i < intent_dictionary.length; i++) {
             if (intent.getStringArrayExtra(intent_dictionary[i]) != null) {
                 message = intent.getStringArrayExtra(intent_dictionary[i]);
@@ -167,13 +175,17 @@ public class SearchResultActivity extends AppCompatActivity {
         }
     }
 
+    /*
+    Search for the product by the input received from frontend
+     */
     public void findProduct() {
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
 
         Intent intent = getIntent();
-        if (intent.getStringExtra("iPhone XS 64GB") != null) {
-            String message = intent.getStringExtra("iPhone XS 64GB");
+        if (intent.getStringExtra("Field_Input") != null) {
+            String message = intent.getStringExtra("Field_Input");
 
+            // setup for the table, retrive the references of UI elements for further use
             Product amazon_product = dbHandler.findAmazonHandler(message);  // not ready
 
             TextView name_amazon = (TextView) this.findViewById(R.id.product_name_amazon);
@@ -181,11 +193,6 @@ public class SearchResultActivity extends AppCompatActivity {
             TextView company_amazon = (TextView) this.findViewById(R.id.company_amazon);
             TextView source_amazon = (TextView) this.findViewById(R.id.source_amazon);
             TextView storage_amazon = (TextView) this.findViewById(R.id.storage_amazon);
-            name_amazon.setText(message);
-            price_amazon.setText(String.valueOf(amazon_product.getPrice()));
-            company_amazon.setText(amazon_product.getDescription());
-            source_amazon.setText("Amazon");
-            storage_amazon.setText(findStorage(amazon_product.getName()));
 
             Product tmall_product = dbHandler.findTmallHandler(message);  // not ready
 
@@ -194,14 +201,37 @@ public class SearchResultActivity extends AppCompatActivity {
             TextView company_tmall = (TextView) this.findViewById(R.id.company_tmall);
             TextView source_tmall = (TextView) this.findViewById(R.id.source_tmall);
             TextView storage_tmall = (TextView) this.findViewById(R.id.storage_tmall);
-            name_tmall.setText(message);
-            price_tmall.setText(String.valueOf(tmall_product.getPrice()));
-            company_tmall.setText(tmall_product.getDescription());
-            source_tmall.setText("Tmall");
-            storage_tmall.setText(findStorage(tmall_product.getName()));
+
+            // while these two products objects are not null, get the attributes from them
+            // and set them for display
+            if (amazon_product == null && tmall_product == null) {
+                Toast.makeText(this, "No Product Found", Toast.LENGTH_SHORT).show();
+            }
+
+            else if  (amazon_product == null) {
+                Toast.makeText(this, "No Product Found in Amazon", Toast.LENGTH_SHORT).show();
+            }
+            else if (tmall_product == null) {
+                Toast.makeText(this, "No Product Found in Tmall", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                name_amazon.setText(message);
+                price_amazon.setText(String.valueOf(amazon_product.getPrice()));
+                company_amazon.setText(amazon_product.getDescription());
+                source_amazon.setText("Amazon");
+                storage_amazon.setText(findStorage(amazon_product.getName()));
+
+
+                name_tmall.setText(message);
+                price_tmall.setText(String.valueOf(tmall_product.getPrice()));
+                company_tmall.setText(tmall_product.getDescription());
+                source_tmall.setText("Tmall");
+                storage_tmall.setText(findStorage(tmall_product.getName()));
+            }
         }
     }
 
+    // a method to parse the phone name to retrieve the storage
     public String findStorage(String input){
         int index = 0;
         int[] number = new int[3];

@@ -32,7 +32,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-
+        // setup the brand list on the homepage
         ListView brandsListView = (ListView) rootView.findViewById(R.id.brands_list);
         ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, brands);
         brandsListView.setAdapter(listAdapter);
@@ -54,6 +54,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
            }
         });
 
+        // get the button objects
         serachButton = rootView.findViewById(R.id.serach_button);
         serachButton.setOnClickListener(HomeFragment.this);
         edittext = rootView.findViewById(R.id.edittext);
@@ -64,16 +65,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.serach_button) {
-            //这些操作，同时传递参数
             findProduct();
         }
     }
 
+    // get the input from text field and send it to backend
     public void findProduct() {
         EditText search_input = (EditText) getActivity().findViewById(R.id.edittext);
         String input = search_input.getText().toString();
         Intent intent = new Intent(getContext(), SearchResultActivity.class);
-        intent.putExtra("iPhone XS 64GB", input);
+        intent.putExtra("Field_Input", input);
         startActivity(intent);
     }
 

@@ -25,10 +25,14 @@ public class AppleModelsPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_apple_models_page);
 
+        // set up the apple product list
         listView = (ExpandableListView)findViewById(R.id.apple_models_list);
         initData();
         listAdapter = new MyExpandableListAdapter(this, models,listHash);
         listView.setAdapter(listAdapter);
+
+        // set up the button action listener so as to send the query to the backend and go to the
+        // results page
         listView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View view,
@@ -103,6 +107,7 @@ public class AppleModelsPageActivity extends AppCompatActivity {
         });
     }
 
+    // data initialization
     private void initData() {
         models = new ArrayList<>();
         listHash = new HashMap<>();

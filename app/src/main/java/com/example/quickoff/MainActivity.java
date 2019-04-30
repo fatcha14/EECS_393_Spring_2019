@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             dbHandler.addHandler(inputlist.get(i));
         }
     }
-    //对应这里，点击进入对应的fragment
+    // navigate to the corresponding fragment
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
@@ -93,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    // define what fragment that back button can go to
     @Override
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -102,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-
+    // initialize the data stored in the CSV from the web scraping
     public void initCsv() {
         InputStream inputStream = getResources().openRawResource(R.raw.results);
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
